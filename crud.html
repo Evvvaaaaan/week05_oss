@@ -78,12 +78,45 @@
         outline-offset: 2px;
       }
 
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #dce3ec;
+        text-align: left;
+      }
+
+      th {
+        background-color: #e8eef7;
+      }
+
+      tbody tr:hover {
+        background-color: #f0f5ff;
+      }
+
+      td:last-child {
+        white-space: nowrap;
+      }
+
+      td button {
+        margin: 3px;
+      }
+
       .delete-button {
         background-color: #dc2626;
       }
 
       .delete-button:hover {
         background-color: #b91c1c;
+      }
+
+      .table-container {
+        overflow-x: auto;
       }
     </style>
   </head>
@@ -119,20 +152,22 @@
     </form>
 
     <h2>여행 목록</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>여행 이름</th>
-          <th>여행지</th>
-          <th>출발일</th>
-          <th>예산</th>
-          <th>상태</th>
-          <th>관리</th>
-        </tr>
-      </thead>
-      <tbody id="tripList"></tbody>
-    </table>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>여행 이름</th>
+            <th>여행지</th>
+            <th>출발일</th>
+            <th>예산</th>
+            <th>상태</th>
+            <th>관리</th>
+          </tr>
+        </thead>
+        <tbody id="tripList"></tbody>
+      </table>
+    </div>
     <script>
       let trips = [
         {
