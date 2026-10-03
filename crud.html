@@ -81,6 +81,7 @@
 
       const tripForm = document.querySelector("#tripForm");
       const tripList = document.querySelector("#tripList");
+      let editingId = null;
 
       function renderTrips() {
         tripList.textContent = "";
@@ -103,6 +104,24 @@
           });
 
           const actionCell = document.createElement("td");
+          const editButton = document.createElement("button");
+          editButton.type = "button";
+          editButton.textContent = "수정";
+
+          editButton.addEventListener("click", () => {
+            editingId = trip.id;
+
+            document.querySelector("#title").value = trip.title;
+            document.querySelector("#destination").value = trip.destination;
+            document.querySelector("#startDate").value = trip.startDate;
+            document.querySelector("#budget").value = trip.budget;
+            document.querySelector("#status").value = trip.status;
+
+            tripForm.querySelector('button[type="submit"]').textContent =
+              "저장";
+          });
+
+          actionCell.appendChild(editButton);
           row.appendChild(actionCell);
           tripList.appendChild(row);
         });
@@ -142,20 +161,32 @@
           document.querySelector("#budget").focus();
           return;
         }
+        if (editingId === null) {
+          const newTrip = {
+            id: trips.length + 1,
+            title,
+            destination,
+            startDate,
+            budget,
+            status,
+          };
+          trips.push(newTrip);
+        } else {
+          const trip = trips.find(function (item) {
+            return item.id === editingId;
+          });
 
-        const newTrip = {
-          id: trips.length + 1,
-          title,
-          destination,
-          startDate,
-          budget,
-          status,
-        };
-
-        trips.push(newTrip);
+          trip.title = title;
+          trip.destination = destination;
+          trip.startDate = startDate;
+          trip.budget = budget;
+          trip.status = status;
+        }
         renderTrips();
-        console.log(trips);
         tripForm.reset();
+
+        editingId = null;
+        tripForm.querySelector('button[type="submit"]').textContent = "추가";
       });
     </script>
   </body>
