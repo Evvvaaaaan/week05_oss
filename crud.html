@@ -82,6 +82,7 @@
       const tripForm = document.querySelector("#tripForm");
       const tripList = document.querySelector("#tripList");
       let editingId = null;
+      let nextId = 4;
 
       function renderTrips() {
         tripList.textContent = "";
@@ -105,8 +106,28 @@
 
           const actionCell = document.createElement("td");
           const editButton = document.createElement("button");
+          const deleteButton = document.createElement("button");
+          deleteButton.type = "button";
+          deleteButton.textContent = "삭제";
           editButton.type = "button";
           editButton.textContent = "수정";
+
+          deleteButton.addEventListener("click", () => {
+            if (!confirm("이 여행을 삭제하시겠습니까?")) {
+              return;
+            }
+            trips = trips.filter(function (item) {
+              return item.id !== trip.id;
+            });
+
+            if (editingId === trip.id) {
+              editingId = null;
+              tripForm.reset();
+              tripForm.querySelector('button[type="submit"]').textContent =
+                "추가";
+            }
+            renderTrips();
+          });
 
           editButton.addEventListener("click", () => {
             editingId = trip.id;
@@ -122,6 +143,8 @@
           });
 
           actionCell.appendChild(editButton);
+
+          actionCell.appendChild(deleteButton);
           row.appendChild(actionCell);
           tripList.appendChild(row);
         });
@@ -163,7 +186,7 @@
         }
         if (editingId === null) {
           const newTrip = {
-            id: trips.length + 1,
+            id: nextId,
             title,
             destination,
             startDate,
@@ -171,6 +194,7 @@
             status,
           };
           trips.push(newTrip);
+          nextId++;
         } else {
           const trip = trips.find(function (item) {
             return item.id === editingId;
