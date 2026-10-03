@@ -276,7 +276,7 @@
         const title = document.querySelector("#title").value.trim();
         const destination = document.querySelector("#destination").value.trim();
         const startDate = document.querySelector("#startDate").value;
-        const budget = parseInt(document.querySelector("#budget").value);
+        const budget = document.querySelector("#budget").valueAsNumber;
         const status = document.querySelector("#status").value;
 
         console.log(title, destination, startDate, budget, status);
