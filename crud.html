@@ -58,6 +58,33 @@
         outline: 2px solid #2563eb;
         outline-offset: 2px;
       }
+
+      button {
+        padding: 9px 16px;
+        border: none;
+        border-radius: 6px;
+        font: inherit;
+        cursor: pointer;
+        color: white;
+        background-color: #2563eb;
+      }
+
+      button:hover {
+        background-color: #1d4ed8;
+      }
+
+      button:focus-visible {
+        outline: 2px solid #263348;
+        outline-offset: 2px;
+      }
+
+      .delete-button {
+        background-color: #dc2626;
+      }
+
+      .delete-button:hover {
+        background-color: #b91c1c;
+      }
     </style>
   </head>
   <body>
@@ -164,6 +191,7 @@
           const deleteButton = document.createElement("button");
           deleteButton.type = "button";
           deleteButton.textContent = "삭제";
+          deleteButton.classList.add("delete-button");
           editButton.type = "button";
           editButton.textContent = "수정";
 
