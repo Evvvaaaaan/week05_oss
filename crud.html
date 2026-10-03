@@ -37,7 +37,6 @@
     </form>
 
     <h2>여행 목록</h2>
-
     <table>
       <thead>
         <tr>
@@ -47,9 +46,10 @@
           <th>출발일</th>
           <th>예산</th>
           <th>상태</th>
-          <th>수정 /삭제</th>
+          <th>관리</th>
         </tr>
       </thead>
+      <tbody id="tripList"></tbody>
     </table>
     <script>
       let trips = [
@@ -78,6 +78,85 @@
           status: "완료",
         },
       ];
+
+      const tripForm = document.querySelector("#tripForm");
+      const tripList = document.querySelector("#tripList");
+
+      function renderTrips() {
+        tripList.textContent = "";
+
+        trips.forEach(function (trip) {
+          const row = document.createElement("tr");
+          const values = [
+            trip.id,
+            trip.title,
+            trip.destination,
+            trip.startDate,
+            trip.budget,
+            trip.status,
+          ];
+
+          values.forEach(function (value) {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+          });
+
+          const actionCell = document.createElement("td");
+          row.appendChild(actionCell);
+          tripList.appendChild(row);
+        });
+      }
+
+      renderTrips();
+
+      tripForm.addEventListener("submit", (even) => {
+        even.preventDefault();
+
+        const title = document.querySelector("#title").value.trim();
+        const destination = document.querySelector("#destination").value.trim();
+        const startDate = document.querySelector("#startDate").value;
+        const budget = parseInt(document.querySelector("#budget").value);
+        const status = document.querySelector("#status").value;
+
+        console.log(title, destination, startDate, budget, status);
+
+        if (title.length < 2) {
+          alert("여행 이름은 2글자 이상이어야 합니다.");
+          document.querySelector("#title").focus();
+          return;
+        }
+        if (destination === "") {
+          alert("여행지를 입력하세요.");
+          document.querySelector("#destination").focus();
+          return;
+        }
+
+        if (startDate === "") {
+          alert("출발일을 입력하세요.");
+          document.querySelector("#startDate").focus();
+          return;
+        }
+        if (Number.isNaN(budget) || budget < 0) {
+          alert("예산을 올바르게 입력하세요.");
+          document.querySelector("#budget").focus();
+          return;
+        }
+
+        const newTrip = {
+          id: trips.length + 1,
+          title,
+          destination,
+          startDate,
+          budget,
+          status,
+        };
+
+        trips.push(newTrip);
+        renderTrips();
+        console.log(trips);
+        tripForm.reset();
+      });
     </script>
   </body>
 </html>
