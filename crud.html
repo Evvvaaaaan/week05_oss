@@ -9,7 +9,48 @@
     <!-- id, title, destination, startDate, budget, status -->
     <h1>여행 관리</h1>
     <h2>여행 추가</h2>
-    <form id="tripForm"></form>
+    <form id="tripForm">
+      <div>
+        <label for="title">여행 이름</label> <input type="text" id="title" />
+      </div>
+      <div>
+        <label for="destination">여행지</label>
+        <input type="text" id="destination" />
+      </div>
+      <div>
+        <label for="startDate">출발일</label>
+        <input type="date" id="startDate" />
+      </div>
+      <div>
+        <label for="budget">예산</label> <input type="number" id="budget" />
+      </div>
+      <div>
+        <label for="status">상태</label>
+        <select id="status">
+          <option value="예정">예정</option>
+          <option value="계획중">계획중</option>
+          <option value="진행중">진행중</option>
+          <option value="완료">완료</option>
+        </select>
+      </div>
+      <button type="submit">추가</button>
+    </form>
+
+    <h2>여행 목록</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>여행 이름</th>
+          <th>여행지</th>
+          <th>출발일</th>
+          <th>예산</th>
+          <th>상태</th>
+          <th>수정 /삭제</th>
+        </tr>
+      </thead>
+    </table>
     <script>
       let trips = [
         {
