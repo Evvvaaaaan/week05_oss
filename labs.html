@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 클릭버튼 실습 -->
+    <!-- inline js -->
+    <button id="clickBtn" onclick="clickMe()">Click Me</button>
+
+    <!-- 클릭버튼 실습 -->
+    <!-- internal js -->
+    <button id="clickBtn2">Click Me</button>
+
+    <!--  계산기 실습 -->
+    <h1>덧셈 계산기</h1>
+    <input type="text" name="" id="num1" size="4" />
+    <input type="text" name="" id="num2" size="4" />
+    <button id="addBtn" size="4">+</button>
+    <input type="text" name="" id="result" size="4" readonly />
+    <script>
+      function clickMe() {
+        const clickBtn = document.getElementById("clickBtn");
+        clickBtn.innerHTML = "Clicked!";
+      }
+      const clickBtn2 = document.querySelector("#clickBtn2");
+      clickBtn2.addEventListener("click", function () {
+        clickBtn2.innerHTML = "Clicked!";
+      });
+
+      const addBtn = document.getElementById("addBtn");
+      addBtn.addEventListener("click", function () {
+        const num1 = parseFloat(document.getElementById("num1").value);
+        const num2 = parseFloat(document.getElementById("num2").value);
+        const result = document.getElementById("result");
+        result.value = num1 + num2;
+      });
+    </script>
+  </body>
+</html>

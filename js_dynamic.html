@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" />
+    <button>추가</button>
+    <ul></ul>
+
+    <script>
+      const button = document.querySelector("button");
+      const input = document.querySelector("input");
+      const ul = document.querySelector("ul");
+
+      button.addEventListener("click", () => {
+        input.value.split(",").forEach(function (item) {
+          const text = item.trim();
+          if (text === "") return;
+
+          const li = document.createElement("li");
+          li.textContent = text;
+
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "삭제";
+
+          deleteButton.addEventListener("click", function () {
+            li.remove();
+          });
+          li.appendChild(deleteButton);
+          ul.append(li);
+        });
+        input.value = "";
+      });
+    </script>
+  </body>
+</html>
